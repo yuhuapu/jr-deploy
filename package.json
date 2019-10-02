@@ -13,7 +13,8 @@
     "nodemon": "^1.19.3"
   },
   "scripts": {
-    "dev": "nodemon run index.js"
+    "dev": "nodemon run index.js",
+    "start": "pm2-runtime start ecosystem.config.js"
   },
   "author": "",
   "license": "ISC"
