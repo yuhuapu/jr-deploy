@@ -1,8 +1,11 @@
 const express = require('express')
-const cors = require('cors')
 const app = express()
-app.use(express.json()); //中间键
+app.use(express.json()) //中间键
 
+var cors = require('cors')
+app.use(cors())
+
+require('dotenv').config()
 
 const posts = [];
 let currentId = 1;
@@ -18,7 +21,7 @@ app.get('/v1/posts/:id', (req, res)=>{
   const {id} = req.params;
  //在post数组中找到对应的post
  // google: js find element from array of elements 
-  const post = posts.find(i => i.id === Number(id))
+  const post = posts.find(i => i.id === Number(id));
   // const post = posts.find(i ==> {
   // (return i.id === id;
   // }) 
@@ -54,9 +57,9 @@ app.delete('/v1/posts/:id', (req, res)=>{
   const postIndex = posts.findIndex(i => i.id === Number(id));
 
   //如果post找不到
-  if (postIndex = -1) {
+  if (postIndex === -1) {
     return res.sendStatus(404);
-  }
+  };
 
   //把这个post删除
   const deletePost = posts.splice(postIndex, 1);
@@ -96,6 +99,6 @@ app.patch('/v1/posts/:id', (req, res)=>{
 
 const PORT = process.env.PORT;
  
-app.listen(PORT, ()=>{
-  console.log('server listening on port ${PORT}')
+app.listen(PORT, ()=> {
+  console.log(`server listening on port ${PORT}`)
 })
